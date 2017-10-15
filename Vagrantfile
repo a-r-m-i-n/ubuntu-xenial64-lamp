@@ -49,4 +49,15 @@ Vagrant.configure("2") do |config|
     node.vm.network :private_network, ip: '192.168.155.15'
     node.hostmanager.aliases = %w(xenial.vagrant xenial.local)
   end
+
+  # Provider Scripts
+  # Run always
+  config.vm.provision "shell", run: "always", inline: <<-SHELL
+    cd ~
+    sudo composer self-update --no-progress
+  SHELL
+
+  # Run once
+  config.vm.provision "shell", inline: <<-SHELL 
+  SHELL
 end
