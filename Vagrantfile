@@ -14,50 +14,45 @@ unless Vagrant.has_plugin?("vagrant-hostmanager")
 end
 
 Vagrant.configure("2") do |config|
-  # Base configuration
-  config.vm.box = "ArminVieweg/ubuntu-xenial64-lamp"
+    # Base configuration
+    config.vm.box = "ArminVieweg/ubuntu-xenial64-lamp"
 
-  config.vm.network "forwarded_port", guest: 80, host: 8080
-  config.vm.network "private_network", type: "dhcp"
+    staticIdAddress = "192.168.11.1"
+    httpPortForwardingHost = "8080"
+    config.vm.hostname = "xenial.vagrant"
 
-  config.vm.provider "virtualbox" do |vb|
-    vb.memory = 4096
-    vb.cpus = 2
-  end
+    config.vm.network "private_network", type: "dhcp"
+    config.vm.provider "virtualbox" do |vb|
+        vb.memory = 4096
+        vb.cpus = 2
+    end
 
-  # Synchronization
-  config.vm.synced_folder ".", "/vagrant", disabled: true
-  config.vm.synced_folder ".", "/var/nfs", type: "nfs"
+    # Synchronization
+    config.vm.synced_folder ".", "/vagrant", disabled: true
+    config.vm.synced_folder ".", "/var/nfs", type: "nfs"
 
-  config.bindfs.bind_folder "/var/nfs", "/vagrant"
-  config.bindfs.bind_folder "/var/nfs", "/var/www/html"
+    config.bindfs.bind_folder "/var/nfs", "/vagrant",
+        perms: "u=rwX:g=rwX:o=rD"
+    config.bindfs.bind_folder "/var/nfs", "/var/www/html",
+        perms: "u=rwX:g=rwX:o=rD", force_user: "vagrant", force_group: "www-data"
 
-  config.bindfs.default_options = {
-    force_user:   "vagrant",
-    force_group:  "www-data",
-    perms:        "u=rwX:g=rwX:o=rD"
-  }
+    # Hostmanager
+    config.hostmanager.enabled = true
+    config.hostmanager.manage_host = true
+    config.hostmanager.manage_guest = true
+    config.hostmanager.ignore_private_ip = false
+    config.hostmanager.include_offline = true
 
-  # Hostmanager
-  config.hostmanager.enabled = true
-  config.hostmanager.manage_host = true
-  config.hostmanager.manage_guest = true
-  config.hostmanager.ignore_private_ip = false
-  config.hostmanager.include_offline = true
-  config.vm.define 'default' do |node|
-    node.vm.hostname = 'xenial-vagrant'
-    node.vm.network :private_network, ip: '192.168.155.15'
-    node.hostmanager.aliases = %w(xenial.vagrant xenial.local)
-  end
+    config.vm.define "default" do |node|
+        node.vm.network :private_network, ip: staticIdAddress
+        node.vm.network :forwarded_port, guest: 80, host: httpPortForwardingHost
+    end
 
-  # Provider Scripts
-  # Run always
-  config.vm.provision "shell", run: "always", inline: <<-SHELL
-    cd ~
-    sudo composer self-update --no-progress
-  SHELL
+    # Provider Scripts
+    # Run always
+    config.vm.provision "shell", run: "always", inline: <<-SHELL
+        cd ~
+        composer self-update --no-progress
+    SHELL
 
-  # Run once
-  config.vm.provision "shell", inline: <<-SHELL 
-  SHELL
 end
