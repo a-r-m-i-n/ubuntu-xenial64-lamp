@@ -19,12 +19,37 @@ configured synced_folders, e.g.
 
 You may use the Vagrantfile in this repository. Put the file to your project's root and perform a `vagrant up`.
 
+### Vagrant Plugins
+
+This Vagrantfile requires the following plugins to be installed:
+
+* vagrant-bindfs
+* vagrant-hostmanager
+* vagrant-winnfsd (for Windows only)
+
+The plugins get installed automatically on first `vagrant up`. If an error occure that "hostmanager" is an unknown configuration, just `vagrant up` again, after the plugin has been installed.
+
+### Variables in Vagrantfile
+
+There are some points in Vagrantfile you may adjust for your projects. To be able to run multiple instances
+on one host, you need to specify a unique static ip address. Also the port forwardning for http must be unique 
+for all booted boxes.
+
+Default values:
+
+```
+staticIdAddress = "192.168.11.1"
+httpPortForwardingHost = "8080"
+config.vm.hostname = "xenial.vagrant"
+```
+
 
 ## Basics
 
 * The default document root is `/var/www/html`.
 * MySQL root user has no password set.
 * Use `vagrant`/`vagrant` to login with ssh (or `vagrant ssh`)
+* Supports `vagrant share` (with [ngrok](https://ngrok.com/download) installed)
 
 
 ## Configuration
@@ -39,7 +64,6 @@ The following files are existing:
 * **php-all.ini** Used with all versions (not CLI)
 * **php-cli.ini** Used for CLI usage (all versions)
 * **php-xdebug.ini** Settings for XDebug
-
 
 ### Switch between PHP versions
 
