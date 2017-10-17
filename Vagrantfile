@@ -17,7 +17,7 @@ Vagrant.configure("2") do |config|
     # Base configuration
     config.vm.box = "ArminVieweg/ubuntu-xenial64-lamp"
 
-    staticIdAddress = "192.168.11.1"
+    staticIdAddress = "192.168.11.15"
     httpPortForwardingHost = "8080"
     config.vm.hostname = "xenial.vagrant"
 
