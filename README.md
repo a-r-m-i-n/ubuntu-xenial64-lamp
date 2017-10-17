@@ -1,14 +1,17 @@
 # Ubuntu Xenial LAMP Vagrant Box
 
-The [ArminVieweg/ubuntu-xenial64-lamp](https://app.vagrantup.com/ArminVieweg/boxes/ubuntu-xenial64-lamp) vagrant box
-a lightweight (<700MB) based on latest Ubuntu Xenial 64-bit. The following components are installed:
+The [ArminVieweg/ubuntu-xenial64-lamp](https://app.vagrantup.com/ArminVieweg/boxes/ubuntu-xenial64-lamp) box is a 
+lightweight (<700MB) Vagrant box for VirtualBox based on latest Ubuntu Xenial 64-bit, released under GPL-2.0+. 
+
+The following components are installed:
 
 * Apache 2
-* PHP 5.6, 7.0, 7.1, 7.2
+* PHP 5.6, 7.0, 7.1, 7.2 (globally switchable)
 * XDebug for all versions (except 7.2)
 * MariaDB
 * ImageMagick
 * Composer
+* NodeJS & npm
 
 
 ## Installation
@@ -79,3 +82,8 @@ Available versions:
 * 7.2.sh
 
 Apache is automatically restarted and also CLI PHP version is changed.
+
+## Diskspace
+
+The virtual hard disk shipped with [ArminVieweg/ubuntu-xenial64-lamp](https://app.vagrantup.com/ArminVieweg/boxes/ubuntu-xenial64-lamp) 
+stores up to 500 GB by default.
