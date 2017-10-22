@@ -12,6 +12,9 @@ end
 unless Vagrant.has_plugin?("vagrant-hostmanager")
     system "vagrant plugin install vagrant-hostmanager"
 end
+unless Vagrant.has_plugin?("vagrant-triggers")
+    system "vagrant plugin install vagrant-triggers"
+end
 
 Vagrant.configure("2") do |config|
     # Base configuration
@@ -20,6 +23,12 @@ Vagrant.configure("2") do |config|
     staticIdAddress = "192.168.11.15"
     httpPortForwardingHost = "8080"
     config.vm.hostname = "xenial.vagrant"
+    
+    if Vagrant::Util::Platform.windows? then
+        config.trigger.after :up, :good_exit => [0, 1] do
+            run "explorer http://#{config.vm.hostname}"
+        end
+    end
 
     config.vm.network "private_network", type: "dhcp"
     config.vm.provider "virtualbox" do |vb|
