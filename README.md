@@ -6,12 +6,13 @@ lightweight (<700MB) Vagrant box for VirtualBox based on latest Ubuntu Xenial 64
 The following components are installed:
 
 * Apache 2
-* PHP 5.6, 7.0, 7.1, 7.2 (globally switchable)
-* XDebug for all versions (except 7.2)
+* PHP 5.6, 7.0, 7.1, 7.2 (globally switchable, 7.2 enabled by default)
+* XDebug for all versions
 * MariaDB
 * ImageMagick
 * Composer
 * NodeJS & npm
+* Ruby
 
 
 ## Installation
@@ -30,7 +31,8 @@ This Vagrantfile requires the following plugins to be installed:
 * vagrant-hostmanager
 * vagrant-winnfsd (for Windows only)
 
-The plugins get installed automatically on first `vagrant up`. If an error occure that "hostmanager" is an unknown configuration, just `vagrant up` again, after the plugin has been installed.
+The plugins get installed automatically on first `vagrant up`. If an error occure that "hostmanager" is an unknown 
+configuration, just `vagrant up` again, after the plugin has been installed.
 
 ### Variables in Vagrantfile
 
@@ -79,7 +81,7 @@ Available versions:
 * 5.6.sh
 * 7.0.sh
 * 7.1.sh
-* 7.2.sh
+* 7.2.sh (enabled by default)
 
 Apache is automatically restarted and also CLI PHP version is changed.
 

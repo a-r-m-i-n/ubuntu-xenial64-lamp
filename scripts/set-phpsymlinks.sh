@@ -35,8 +35,7 @@ ln -s /home/vagrant/php-cli.ini 99-php-cli.ini
 
 # PHP 7.2
 cd /etc/php/7.2/apache2/conf.d
-# Not supported yet
-# ln -s /home/vagrant/php-xdebug.ini 80-xdebug.ini
+ln -s /home/vagrant/php-xdebug.ini 80-xdebug.ini
 ln -s /home/vagrant/php-all.ini 90-php-all.ini
 ln -s /home/vagrant/php-7.2.ini 95-php-7.2.ini
 
