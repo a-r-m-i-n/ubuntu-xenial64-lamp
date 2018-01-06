@@ -4,7 +4,7 @@
 #  - http://vstone.eu/reducing-vagrant-box-size/
 #  - https://github.com/mitchellh/vagrant/issues/343
 
-# Notice: Run in `sudo bash`!my
+# Notice: Run in `sudo bash`
 
 echo "Purging VM (this may take a while)..."
 

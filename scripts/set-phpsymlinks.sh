@@ -1,5 +1,6 @@
 #!/bin/bash
 
+
 # PHP 5.6
 cd /etc/php/5.6/apache2/conf.d
 ln -s /home/vagrant/php-xdebug.ini 80-xdebug.ini
