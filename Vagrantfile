@@ -30,6 +30,8 @@ Vagrant.configure("2") do |config|
         end
     end
 
+	config.ssh.insert_key = false
+
     config.vm.network "private_network", type: "dhcp"
     config.vm.provider "virtualbox" do |vb|
         vb.memory = 4096

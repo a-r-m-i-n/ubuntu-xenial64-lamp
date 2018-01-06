@@ -4,18 +4,18 @@
 #  - http://vstone.eu/reducing-vagrant-box-size/
 #  - https://github.com/mitchellh/vagrant/issues/343
 
+# Notice: Run in `sudo bash`!my
+
 echo "Purging VM (this may take a while)..."
 
 rm -rf ~/.nano
 rm -rf ~/.composer/vendor/*
 rm -rf ~/.phpstorm_helpers
 rm -f ~/.sudo_as_admin_successful
-echo "" > ~/.ssh/authorized_keys
 
 # Remove bash history
 unset HISTFILE
-rm -f /root/.bash_history
-rm -f /home/vagrant/.bash_history
+rm -f /root/.bash_history /home/vagrant/.bash_history
 rm -Rf /home/vagrant/.nano
 
 composer clearcache
