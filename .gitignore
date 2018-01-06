@@ -1,3 +1,5 @@
 .idea
 .vagrant
-package.box
+*.box
+*.tgz
+adminer.php
