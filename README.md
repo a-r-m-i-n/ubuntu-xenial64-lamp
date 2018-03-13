@@ -43,7 +43,7 @@ for all booted boxes.
 Default values:
 
 ```
-staticIdAddress = "192.168.11.1"
+staticIpAddress = "192.168.11.1"
 httpPortForwardingHost = "8080"
 config.vm.hostname = "xenial.vagrant"
 ```

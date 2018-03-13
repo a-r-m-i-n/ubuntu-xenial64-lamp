@@ -20,7 +20,7 @@ Vagrant.configure("2") do |config|
     # Base configuration
     config.vm.box = "ArminVieweg/ubuntu-xenial64-lamp"
 
-    staticIdAddress = "192.168.11.15"
+    staticIpAddress = "192.168.11.1"
     httpPortForwardingHost = "8080"
     config.vm.hostname = "xenial.vagrant"
     
@@ -55,7 +55,7 @@ Vagrant.configure("2") do |config|
     config.hostmanager.include_offline = true
 
     config.vm.define "default" do |node|
-        node.vm.network :private_network, ip: staticIdAddress
+        node.vm.network :private_network, ip: staticIpAddress
         node.vm.network :forwarded_port, guest: 80, host: httpPortForwardingHost
     end
 
