@@ -12,22 +12,19 @@ end
 unless Vagrant.has_plugin?("vagrant-hostmanager")
     system "vagrant plugin install vagrant-hostmanager"
 end
-unless Vagrant.has_plugin?("vagrant-triggers")
-    system "vagrant plugin install vagrant-triggers"
-end
 
 Vagrant.configure("2") do |config|
     # Base configuration
     config.vm.box = "ArminVieweg/ubuntu-xenial64-lamp"
 
-    staticIpAddress = "192.168.11.1"
+    staticIpAddress = "192.168.11.2"
     httpPortForwardingHost = "8080"
     config.vm.hostname = "xenial.vagrant"
     
     if Vagrant::Util::Platform.windows? then
-        config.trigger.after :up, :good_exit => [0, 1] do
-            run "explorer http://#{config.vm.hostname}"
-        end
+        #config.trigger.after :up do |trigger|
+        #    system "explorer http://#{config.vm.hostname}"
+        #end
     end
 
 	config.ssh.insert_key = false
