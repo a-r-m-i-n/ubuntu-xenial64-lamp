@@ -21,12 +21,6 @@ Vagrant.configure("2") do |config|
     httpPortForwardingHost = "8080"
     config.vm.hostname = "xenial.vagrant"
     
-    if Vagrant::Util::Platform.windows? then
-        #config.trigger.after :up do |trigger|
-        #    system "explorer http://#{config.vm.hostname}"
-        #end
-    end
-
 	config.ssh.insert_key = false
 
     config.vm.network "private_network", type: "dhcp"
