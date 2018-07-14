@@ -18,10 +18,11 @@ The following components are installed:
 ## Installation
 
 Just perform a `vagrant init ArminVieweg/ubuntu-xenial64-lamp` in your project to use this box.
-This will create a very basic *Vagrantfile* for you. You can also ship your own *Vagrantfile* with
+This will create a very basic Vagrantfile for you. You can also ship your own Vagrantfile with
 configured synced_folders, e.g.
 
 You may use the Vagrantfile in this repository. Put the file to your project's root and perform a `vagrant up`.
+
 
 ### Vagrant Plugins
 
@@ -31,13 +32,14 @@ This Vagrantfile requires the following plugins to be installed:
 * vagrant-hostmanager
 * vagrant-winnfsd (for Windows only)
 
-The plugins get installed automatically on first `vagrant up`. If an error occure that "hostmanager" is an unknown 
-configuration, just `vagrant up` again, after the plugin has been installed.
+The plugins get installed automatically on first `vagrant up`. If an error occurs that "hostmanager" is an unknown 
+configuration, just `vagrant up` again after the plugin has been installed.
+
 
 ### Variables in Vagrantfile
 
 There are some points in Vagrantfile you may adjust for your projects. To be able to run multiple instances
-on one host, you need to specify a unique static ip address. Also the port forwardning for http must be unique 
+on one host, you need to specify a unique static ip address. Also, the port forwarding for http must be unique 
 for all booted boxes.
 
 Default values:
@@ -47,6 +49,7 @@ staticIpAddress = "192.168.11.1"
 httpPortForwardingHost = "8080"
 config.vm.hostname = "xenial.vagrant"
 ```
+
 
 
 ## Basics
@@ -70,6 +73,7 @@ The following files are existing:
 * **php-cli.ini** Used for CLI usage (all versions)
 * **php-xdebug.ini** Settings for XDebug
 
+
 ### Switch between PHP versions
 
 To switch PHP versions just execute:
@@ -85,7 +89,15 @@ Available versions:
 
 Apache is automatically restarted and also CLI PHP version is changed.
 
-## Diskspace
+
+### XDebug profiler dumps
+
+XDebug Profiler is enabled by trigger. Dumps are stored in `/vagrant` and synced back to host.  
+
+
+## Disk space
 
 The virtual hard disk shipped with [ArminVieweg/ubuntu-xenial64-lamp](https://app.vagrantup.com/ArminVieweg/boxes/ubuntu-xenial64-lamp) 
 stores up to 500 GB by default.
+
+New instances of this box require ~2GB of disk space.
