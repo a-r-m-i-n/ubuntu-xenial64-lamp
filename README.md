@@ -13,6 +13,7 @@ The following components are installed:
 * Composer
 * NodeJS & npm
 * Ruby
+* Mailcatcher
 
 
 ## Installation
@@ -54,15 +55,16 @@ config.vm.hostname = "xenial.vagrant"
 
 ## Basics
 
-* The default document root is `/var/www/html`.
-* MySQL root user has no password set.
+* The default document root is `/var/www/html`
+* In MySQL/MariaDB use `root`/`root` to login
+* To open Mailcatcher use port 1080: http://xenial.vagrant:1080
 * Use `vagrant`/`vagrant` to login with ssh (or `vagrant ssh`)
 * Supports `vagrant share` (with [ngrok](https://ngrok.com/download) installed)
 
 
 ## Configuration
 
-In home directory of vagrant user are some php.ini files located, which are symlinked in conf.d folders of php versions.
+In home directory of vagrant user are some php.ini files located, which are sym-linked in conf.d folders of php versions.
 The following files are existing:
 
 * **php-5.6.ini** Just used with PHP 5.6
