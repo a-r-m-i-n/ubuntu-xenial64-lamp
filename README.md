@@ -1,7 +1,7 @@
 # Ubuntu Xenial LAMP Vagrant Box
 
 The [ArminVieweg/ubuntu-xenial64-lamp](https://app.vagrantup.com/ArminVieweg/boxes/ubuntu-xenial64-lamp) box is a 
-lightweight (<700MB) Vagrant box for VirtualBox based on latest Ubuntu Xenial 64-bit, released under GPL-2.0+. 
+lightweight (<800MB) Vagrant box for VirtualBox based on latest Ubuntu Xenial 64-bit, released under GPL-2.0+. 
 
 The following components are installed:
 
