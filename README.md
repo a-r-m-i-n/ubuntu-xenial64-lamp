@@ -5,7 +5,7 @@ lightweight (<800MB) Vagrant box for VirtualBox based on latest Ubuntu Xenial 64
 
 The following components are installed:
 
-* Apache 2
+* Apache 2 (with SSL available)
 * PHP 5.6, 7.0, 7.1, 7.2 (globally switchable, 7.2 enabled by default)
 * XDebug for all versions
 * MariaDB
@@ -33,8 +33,7 @@ This Vagrantfile requires the following plugins to be installed:
 * vagrant-hostmanager
 * vagrant-winnfsd (for Windows only)
 
-The plugins get installed automatically on first `vagrant up`. If an error occurs that "hostmanager" is an unknown 
-configuration, just `vagrant up` again after the plugin has been installed.
+The plugins get installed automatically on first `vagrant up`.
 
 
 ### Variables in Vagrantfile
@@ -46,10 +45,17 @@ for all booted boxes.
 Default values:
 
 ```
-staticIpAddress = "192.168.11.1"
+staticIpAddress = "192.168.11.2"
 httpPortForwardingHost = "8080"
-config.vm.hostname = "xenial.vagrant"
+config.vm.hostname = "xenial.local"
 ```
+
+### Provisioning scripts
+
+Vagrantfile comes with two provisioning scripts.
+
+* `update-ssl-certificate` Updates Apache's SSL certificate, based on configured hostname. (once)
+* `update-composer` Updates Composer on each vagrant up. (always)
 
 
 
@@ -57,7 +63,7 @@ config.vm.hostname = "xenial.vagrant"
 
 * The default document root is `/var/www/html`
 * In MySQL/MariaDB use `root`/`root` to login
-* To open Mailcatcher use port 1080: http://xenial.vagrant:1080
+* To open Mailcatcher use port 1080: http://xenial.local:1080
 * Use `vagrant`/`vagrant` to login with ssh (or `vagrant ssh`)
 * Supports `vagrant share` (with [ngrok](https://ngrok.com/download) installed)
 
@@ -73,7 +79,10 @@ The following files are existing:
 * **php-7.2.ini** Just used with PHP 7.2
 * **php-all.ini** Used with all versions (not CLI)
 * **php-cli.ini** Used for CLI usage (all versions)
-* **php-xdebug.ini** Settings for XDebug
+* **php-xdebug.ini** Settings for XDebug (remote debugging enabled by trigger, profiling prepared but disabled by default)
+
+The paths `/etc/apache2` and `/etc/mysql` have got write permissions for vagrant user. 
+So you can edit configuration without need to perform `sudo` on CLI. 
 
 
 ### Switch between PHP versions

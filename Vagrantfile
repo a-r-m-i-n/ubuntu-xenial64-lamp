@@ -19,7 +19,7 @@ Vagrant.configure("2") do |config|
 
     staticIpAddress = "192.168.11.2"
     httpPortForwardingHost = "8080"
-    config.vm.hostname = "xenial.vagrant"
+    config.vm.hostname = "xenial.local"
     
 	config.ssh.insert_key = false
 
@@ -51,8 +51,22 @@ Vagrant.configure("2") do |config|
     end
 
     # Provider Scripts
+
+    # Run once
+    config.vm.provision "shell", run: "once", name: "update-ssl-certificate", inline: <<-SHELL
+        openssl genrsa -des3 -passout pass:xxxx -out /tmp/server.pass.key 2048 2>/dev/null
+        openssl rsa -passin pass:xxxx -in /tmp/server.pass.key -out /etc/apache2/ssl/apache.key 2>/dev/null
+        rm /tmp/server.pass.key
+        openssl req -new -key /etc/apache2/ssl/apache.key -out /tmp/server.csr \
+          -subj "/C=DE/ST=North Rhine Westphalia/L=Cologne/O=Dev/OU=Dev/CN=#{config.vm.hostname}" 2>/dev/null
+        openssl x509 -req -days 365 -in /tmp/server.csr -signkey /etc/apache2/ssl/apache.key \
+          -out /etc/apache2/ssl/apache.crt 2>/dev/null
+        rm /tmp/server.csr
+        service apache2 restart
+    SHELL
+
     # Run always
-    config.vm.provision "shell", run: "always", inline: <<-SHELL
+    config.vm.provision "shell", run: "always", name: "update-composer", inline: <<-SHELL
         cd ~
         composer self-update --no-progress
     SHELL
