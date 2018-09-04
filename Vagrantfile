@@ -1,19 +1,13 @@
 # -*- mode: ruby -*-
 # vi: set ft=ruby :
 
-if Vagrant::Util::Platform.windows? then
-    unless Vagrant.has_plugin?("vagrant-winnfsd")
-        system "vagrant plugin install vagrant-winnfsd"
-    end
-end
-unless Vagrant.has_plugin?("vagrant-bindfs")
-    system "vagrant plugin install vagrant-bindfs"
-end
-unless Vagrant.has_plugin?("vagrant-hostmanager")
-    system "vagrant plugin install vagrant-hostmanager"
-end
+# The following vagrant plugins are required:
+# - vagrant-bindfs
+# - vagrant-hostmanager
+# - vagrant-winnfsd (Windows only)
 
 Vagrant.configure("2") do |config|
+
     # Base configuration
     config.vm.box = "ArminVieweg/ubuntu-xenial64-lamp"
 
